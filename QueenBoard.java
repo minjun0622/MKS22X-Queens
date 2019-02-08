@@ -20,9 +20,17 @@ You can move through the array using one loop,
 (r, c) -> (r - i, c + i)
 (r, c) -> (r, c + i)
 (r, c) -> (r + i, c + i)
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0    r = row
+0 0 0 0 0    c = column
+0 0 0 0 0
+
 */
+
 //Private methods (suggested):
 //private to see if you can add in a queen.
+//make sure you print out the queen as a mean of testing.
 private boolean addQueen(int r, int c){
   if ((board[r][c] == board[r+1][c]) && board[r][c] == board[r][c+1]){
   board[r][c] += 1;
@@ -96,6 +104,14 @@ public int countSolutions(){
   if (board[0][0] == 0) {
     throw IllegalStateException();
   }
+  int count = 0;
+  if (solve()) {
+    count++;
+  }
+  else {
+
+  }
+
 
 }
 
