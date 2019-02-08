@@ -16,22 +16,24 @@ public QueenBoard(int size){
 
 
 //Private methods (suggested):
+//private to see if you can add in a queen.
 private boolean addQueen(int r, int c){
-  for (int i = 0; i < board.length; i++) {
-    for (int x = 0; x < board[i].length; x++) {
-      if (board[i][x] == board[i+1][x]) {
-        return true;
-      }
-      if (board[i][x] == board [i+1][x+1]){
-      return true;
-    }
-  }
+  if ((board[r][c] == board[r+1][c]) && board[r][c] == board[r][c+1]){
+  board[r][c] += 1;
+  return true;
 }
+else {
+  return false;
 }
 
+//A private method to see if you can remove a queen.
 private boolean removeQueen(int r, int c){
-  s
-
+  if ((board[r][c] == board[r+1][c] && board[r][c] == board[r][c+1])){
+    board[r][c] -= 1;
+  return true;
+}
+else{
+  return false;
 }
 
 
