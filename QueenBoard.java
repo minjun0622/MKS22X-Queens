@@ -15,7 +15,9 @@ public QueenBoard(int size){
 
 
 //Private methods (suggested):
-private boolean addQueen(int r, int c)
+private boolean addQueen(int r, int c){
+  if
+}
 private boolean removeQueen(int r, int c)
 
 
@@ -32,7 +34,18 @@ private boolean removeQueen(int r, int c)
 *(pythonic string notation for clarity,
 *excludes the character up to the *)
 */
-public String toString(){}
+public String toString(){
+  for (int i = 0; i < board.length; i++) {
+    for (int x = 0; x < board[x].length; x++){
+      if (board[i][x] == 0) {
+        board [i][x] = '_';
+      }
+      else {
+        board [i][x] = 'Q';
+      }
+    }
+  }
+}
 
 
 /**
