@@ -1,7 +1,7 @@
 public class QueenBoard {
 //Instance Variables:
 private int[][]board;
-//private boolean threatened;
+private boolean threatened;
 
 //Constructor:
 //sets all the spaces in the board to 0.
@@ -70,7 +70,16 @@ public String toString(){
 *@throws IllegalStateException when the board starts with any non-zero value
 */
 public boolean solve(){
-  if ()
+  if (board[0][0] !== 0){
+    throw IllegalStateException();
+  }
+  for (int i = 0; i < board.length; i++) {
+    for(int x= 0; x < board[i].length; x++) {
+      if (addQueen(i, x)){
+        return solve();
+      }
+    }
+  }
 
 }
 
