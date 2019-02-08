@@ -14,7 +14,13 @@ public QueenBoard(int size){
   }
 }
 
-
+/*
+Nested loops are not necessary.
+You can move through the array using one loop,
+(r, c) -> (r - i, c + i)
+(r, c) -> (r, c + i)
+(r, c) -> (r + i, c + i)
+*/
 //Private methods (suggested):
 //private to see if you can add in a queen.
 private boolean addQueen(int r, int c){
@@ -80,12 +86,24 @@ public boolean solve(){
       }
     }
   }
-
 }
 
 /**
 *@return the number of solutions found, and leaves the board filled with only 0's
 *@throws IllegalStateException when the board starts with any non-zero value
 */
-public int countSolutions(){}
+public int countSolutions(){
+  if (board[0][0] == 0) {
+    throw IllegalStateException();
+  }
+
+}
+
+
+
+
+
+
+
+
 }
