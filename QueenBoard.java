@@ -1,14 +1,14 @@
 public class QueenBoard {
 //Instance Variables:
 private int[][]board;
-private boolean threatened;
+private int Queens;
 
 //Constructor:
 //sets all the spaces in the board to 0.
 public QueenBoard(int size){
   board = new board[size][size];
-  for (int i = 0; i < size; i++) {
-    for (int x = 0; x <board[i].length; x++) {
+    for (int i = 0; i < board.length; i++) {
+    for (int x = 0; x < board.length; x++) {
       board[size][size] = 0;
     }
   }
@@ -31,13 +31,15 @@ You can move through the array using one loop,
 //Private methods (suggested):
 //private to see if you can add in a queen.
 //make sure you print out the queen as a mean of testing.
+
 private boolean addQueen(int r, int c){
+  if (board[r][c] != 0) {
+    return false;
+  }
   if ((board[r][c] == board[r+1][c]) && board[r][c] == board[r][c+1]){
   board[r][c] += 1;
   return true;
 }
-else {
-  return false;
 }
 
 //A private method to see if you can remove a queen.
@@ -66,7 +68,7 @@ else{
 */
 public String toString(){
   for (int i = 0; i < board.length; i++) {
-    for (int x = 0; x < board[x].length; x++){
+    for (int x = 0; x < board.length; x++){
       if (board[i][x] == 0) {
         board [i][x] = '_';
       }
