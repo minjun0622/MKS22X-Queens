@@ -185,7 +185,7 @@ private int counter() {
 
 private boolean helperbool(int c) {
   if (c >= board.length) {
-    return count() == board.length;
+    return counter() == board.length;
   }
 
     for (int i = 0; i < board.length; i++) {
