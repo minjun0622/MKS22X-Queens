@@ -34,41 +34,26 @@ You can move through the array using one loop,
 
 private boolean addQueen(int r, int c){
   //first checks for if the dimensions surpass the board.
-  if (r >= board.length || c >= board[0].length){
+  if (board[r][c] != 0){
     return false;
   }
 
-  //if it's already added, what's the point of adding again??
-  if (board[r][c] != 0) {
-    return false;
-  }
+    for (int i = 1; i < board.length - c; i++) {
+      board[r][c + i]++;
 
-  if (board[r][c] == 0) {
-    board[r][c] = -1;
-    int d = 0;
-
-    //- 1 to make sure that you don't go out of bounds.
-    while (r < board.length - 1) {
-      //this part increments south by one and checks and addding.
-      r++;
-      d++;
-      board[r][c]++;
-
-      // this part increments east by one and checks and adding.
-      if (c + d <= board.length - 1){
-        board[r][c + d]++;
+      if (r - i >= 0) {
+        board[r - i][c + i]++;
       }
 
-      //checks the possibility of going west and adds.
-      if (c - d >= 0) {
-        board[r][c-d]++;
+      if (r + i < board.length) {
+        board[r + i][c + i]++;
       }
     }
-    //return statments.
-    return true;
-  }
-  return false;
-}
+
+      board[r][c] = -1;
+      return true;
+    }
+
   /*
   0 0 0 0
   0 0 0 0
