@@ -101,15 +101,18 @@ private boolean removeQueen(int r, int c){
       for (int x = 0; x < board[i].length; x++) {
         if (board[i][x] != -1) {
           result += "_ ";
+          //_ represents a space.
         }
         else {
           result += "Q ";
+          //Q represents a Queen
         }
       }
     }
     return result;
   }
 
+  //helper method to find the number of queens on the board.
   private int countQ() {
     int count = 0;
     for (int i = 0; i < board.length; i++) {
@@ -122,6 +125,7 @@ private boolean removeQueen(int r, int c){
     return count;
   }
 
+  //helper method for solver method boolean.
   public boolean helperbool(int c) {
     if (c >= board.length) {
       return countQ() == board.length;
@@ -129,6 +133,7 @@ private boolean removeQueen(int r, int c){
     else {
       for (int i = 0; i < board.length; i++) {
         if (addQueen(i, c)) {
+          //the recursive call.
           if (helperbool(c + 1)) {
             return true;
           }
@@ -141,6 +146,7 @@ private boolean removeQueen(int r, int c){
     return false;
   }
 
+  //uses a helper.
   public boolean solve() {
     for (int i = 0; i < board.length; i++) {
       for (int x = 0; x < board.length; x++) {
@@ -152,6 +158,7 @@ private boolean removeQueen(int r, int c){
     return helperbool(0);
   }
 
+  //uses a helper.
   public int countSolutions() {
     for (int i = 0; i < board.length; i++) {
       for (int x = 0; x < board.length; x++) {
@@ -171,6 +178,7 @@ private boolean removeQueen(int r, int c){
     int count = 0;
     for (int i = 0; i < board.length; i++) {
       if (addQueen(i, c)) {
+        //recursive call.
         count += helperint(c + 1);
         removeQueen(i, c);
       }
