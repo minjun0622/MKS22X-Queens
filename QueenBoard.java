@@ -35,6 +35,7 @@ You can move through the array using one loop,
 private boolean addQueen(int r, int c){
   if (board[r][c] != 0) {
     return false;
+    //if it's already added, what's the point of adding again??
   }
   board[r][c] = 1;
   int count = 1;
@@ -57,12 +58,17 @@ private boolean addQueen(int r, int c){
 
 //A private method to see if you can remove a queen.
 private boolean removeQueen(int r, int c){
-  if ((board[r][c] == board[r+1][c] && board[r][c] == board[r][c+1])){
-    board[r][c] -= 1;
-  return true;
-}
-else{
-  return false;
+  if (board[r][c] != 1) {
+    return false;
+    //if there is no queen then how can you remove it?
+  }
+  board[r][c] = 0;
+  int count = 1;
+  while(c + count < board.length) {
+    board[r][c + count]++;
+  }
+
+
 }
 
 
