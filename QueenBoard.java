@@ -1,15 +1,15 @@
 public class QueenBoard {
 //Instance Variables:
 private int[][]board;
-private int Queens;
+private int numQueens;
 
 //Constructor:
 //sets all the spaces in the board to 0.
 public QueenBoard(int size){
-  board = new board[size][size];
+  board = new int [size][size];
     for (int i = 0; i < board.length; i++) {
-    for (int x = 0; x < board.length; x++) {
-      board[size][size] = 0;
+      for (int x = 0; x < board.length; x++) {
+      board [size][size] = 0;
     }
   }
 }
@@ -66,8 +66,17 @@ private boolean removeQueen(int r, int c){
   int count = 1;
   while(c + count < board.length) {
     board[r][c + count]++;
+    if (r - count >= 0) {
+      board[r-count][c + count]++;
+    }
+    if (r - count < board.length) {
+      board[r + count][c + count]++;
+    }
+    count++;
   }
+  numQueens--;
 
+  return true;
 
 }
 
