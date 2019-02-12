@@ -36,11 +36,23 @@ private boolean addQueen(int r, int c){
   if (board[r][c] != 0) {
     return false;
   }
-  while
-  if ((board[r][c] == board[r+1][c]) && board[r][c] == board[r][c+1]){
-  board[r][c] += 1;
+  board[r][c] = 1;
+  int count = 1;
+  while (c + count < board.length) {
+    board[r][c + count]--;
+    if (r - count >= 0) {
+      //moving up.
+      board[r - count][c + count]--;
+    }
+    if (r + count < board.length) {
+      //diagonal shift.
+      board[r + count][c + count]--;
+    }
+    count++;
+  }
+  numQueens++;
+
   return true;
-}
 }
 
 //A private method to see if you can remove a queen.
