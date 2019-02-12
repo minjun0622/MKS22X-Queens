@@ -40,6 +40,25 @@ private boolean addQueen(int r, int c){
     return false;
     //if it's already added, what's the point of adding again??
   }
+  else {
+    board[r][c] = -1;
+    int d = 0;
+
+    while (r < board.length - 1) {
+      r++;
+      d++;
+      board[r][c]++;
+      if (c + d <= board.length - 1){
+        board[r][c + d]++;
+      }
+      if (c - d >= 0) {
+        board[r][c-d]++;
+      }
+    }
+    return true;
+  }
+  return false;
+}
   /*
   0 0 0 0
   0 0 0 0
