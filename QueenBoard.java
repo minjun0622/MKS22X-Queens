@@ -122,20 +122,8 @@ private boolean removeQueen(int r, int c){
   return false;
   }
 
-
 //Public Methods:
-/**
-*@return The output string formatted as follows:
-*All numbers that represent queens are replaced with 'Q'
-*all others are displayed as underscores '_'
-*There are spaces between each symbol:
-*"""_ _ Q _
-*Q _ _ _
-*_ _ _ Q
-*_ Q _ _"""
-*(pythonic string notation for clarity,
-*excludes the character up to the *)
-*/
+
 public String toString(){
   Strng result = "";
   for (int i = 0; i < board.length; i++) {
@@ -155,12 +143,6 @@ public String toString(){
   return result;
 }
 
-
-/**
-*@return false when the board is not solveable and leaves the board filled with zeros;
-*        true when the board is solveable, and leaves the board in a solved state
-*@throws IllegalStateException when the board starts with any non-zero value
-*/
 public boolean solve(){
   for (int i = 0; i < board.length; i++) {
     for (int x = 0; x < board.length; x++) {
@@ -183,7 +165,7 @@ private int counter() {
   return numQueens;
 }
 
-private boolean helperbool(int c) {
+public boolean helperbool(int c) {
   if (c >= board.length) {
     return counter() == board.length;
   }
@@ -205,10 +187,6 @@ private boolean helperbool(int c) {
   return false;
 }
 
-/**
-*@return the number of solutions found, and leaves the board filled with only 0's
-*@throws IllegalStateException when the board starts with any non-zero value
-*/
 public int countSolutions(){
   for (int i = 0; i < board.length; i++) {
     for (int x = 0; x < board.length; x++) {
@@ -219,3 +197,20 @@ public int countSolutions(){
   }
   return helperint(0);
 }
+
+public int helperint(int c) {
+  //if row is equal to dimensions, it is one solution.
+   if (c == board.length) {
+     return 1;
+   }
+
+   int count = 0;
+   for (int i = 0; i < board.length; i++) {
+     if (addQueen(i, c)) {
+       //recursive call once more.
+       count += helperint(i + 1);
+       removeQueen(i, c);
+     }
+   }
+   return count;
+ }
