@@ -185,4 +185,15 @@ private boolean removeQueen(int r, int c){
     }
     return count;
   }
+
+  public static void main(String[] args) {
+    QueenBoard n = new QueenBoard(8);
+    QueenBoard c = new QueenBoard(6);
+    QueenBoard a = new QueenBoard(4);
+    QueenBoard b = new QueenBoard(3);
+    System.out.println(n.countSolutions());
+    System.out.println(c.countSolutions());
+    System.out.println(a.countSolutions());
+    System.out.println(b.countSolutions());
+  }
 }
