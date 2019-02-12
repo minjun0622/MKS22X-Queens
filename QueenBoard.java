@@ -8,8 +8,8 @@ private int numQueens;
 public QueenBoard(int size){
   board = new int [size][size];
     for (int i = 0; i < board.length; i++) {
-      for (int x = 0; x < board.length; x++) {
-      board [size][size] = 0;
+      for (int x = 0; x < board[i].length; x++) {
+      board [i][x] = 0;
     }
   }
 }
@@ -33,6 +33,9 @@ You can move through the array using one loop,
 //make sure you print out the queen as a mean of testing.
 
 private boolean addQueen(int r, int c){
+  if (r >= board.length || c >= board[0].length){
+    return false;
+  }
   if (board[r][c] != 0) {
     return false;
     //if it's already added, what's the point of adding again??
@@ -51,14 +54,8 @@ private boolean addQueen(int r, int c){
   north east = board[r - 1][c + 1]
   south west = board[r + 1][c - 1]
   north west = board[r - 1][c - 1]
-
-
   */
-  board[r][c] = 1;
-  int count = 1;
 
-  return true;
-}
 
 //A private method to see if you can remove a queen.
 private boolean removeQueen(int r, int c){
@@ -66,22 +63,17 @@ private boolean removeQueen(int r, int c){
     return false;
     //if there is no queen then how can you remove it?
   }
-  board[r][c] = 0;
-  int count = 1;
-  while(c + count < board.length) {
-    board[r][c + count]++;
-    if (r - count >= 0) {
-      board[r-count][c + count]++;
+  for (int i = 1; i < board.length - c; i++){
+    board[r][c + i]--;
+    if (r - i >= 0) {
+      board[r - i][c + i]--;
     }
-    if (r - count < board.length) {
-      board[r + count][c + count]++;
+    if (r + i < board.length) {
+      board[r + i][c + i]--;
     }
-    count++;
   }
-  numQueens--;
-
+  board[r][c] = 0;
   return true;
-
 }
 
 
@@ -104,13 +96,14 @@ public String toString(){
     result += "\n";
     for (int x = 0; x < board.length; x++){
       if (board[i][x] == 0) {
-        result = "_ ";
+        result = 'Q';
       }
       else {
-        result = 'Q';
+        result = "_ ";
       }
     }
   }
+  return result;
 }
 
 
@@ -120,16 +113,14 @@ public String toString(){
 *@throws IllegalStateException when the board starts with any non-zero value
 */
 public boolean solve(){
-  if (board[0][0] !== 0){
-    throw IllegalStateException();
-  }
   for (int i = 0; i < board.length; i++) {
-    for(int x= 0; x < board[i].length; x++) {
-      if (addQueen(i, x)){
-        return solve();
+    for (int x = 0; x < board.length; x++) {
+      if (board[i][x] != 0) {
+        throw IllegalStateException("no good.");
       }
     }
   }
+  return helperbool(0);
 }
 
 /**
@@ -137,25 +128,12 @@ public boolean solve(){
 *@throws IllegalStateException when the board starts with any non-zero value
 */
 public int countSolutions(){
-  if (board[0][0] == 0) {
-    throw IllegalStateException();
+  for (int i = 0; i < board.length; i++) {
+    for (int x = 0; x < board.length; x++) {
+      if (board[i][x] != 0) {
+        throw IllegalStateException("no good.");
+      }
+    }
   }
-  int count = 0;
-  if (solve()) {
-    count++;
-  }
-  else {
-
-  }
-
-
-}
-
-
-
-
-
-
-
-
+  return helperint(0);
 }
