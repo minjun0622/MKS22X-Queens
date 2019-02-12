@@ -33,28 +33,38 @@ You can move through the array using one loop,
 //make sure you print out the queen as a mean of testing.
 
 private boolean addQueen(int r, int c){
+  //first checks for if the dimensions surpass the board.
   if (r >= board.length || c >= board[0].length){
     return false;
   }
+
+  //if it's already added, what's the point of adding again??
   if (board[r][c] != 0) {
     return false;
-    //if it's already added, what's the point of adding again??
   }
-  else {
+
+  if (board[r][c] == 0) {
     board[r][c] = -1;
     int d = 0;
 
+    //- 1 to make sure that you don't go out of bounds.
     while (r < board.length - 1) {
+      //this part increments south by one and checks and addding.
       r++;
       d++;
       board[r][c]++;
+
+      // this part increments east by one and checks and adding.
       if (c + d <= board.length - 1){
         board[r][c + d]++;
       }
+
+      //checks the possibility of going west and adds.
       if (c - d >= 0) {
         board[r][c-d]++;
       }
     }
+    //return statments.
     return true;
   }
   return false;
@@ -78,22 +88,39 @@ private boolean addQueen(int r, int c){
 
 //A private method to see if you can remove a queen.
 private boolean removeQueen(int r, int c){
-  if (board[r][c] != 1) {
+  //first checks for if the dimensions surpass the board.
+  if (r >= board.length || c >= board[0].length){
     return false;
-    //if there is no queen then how can you remove it?
   }
-  for (int i = 1; i < board.length - c; i++){
-    board[r][c + i]--;
-    if (r - i >= 0) {
-      board[r - i][c + i]--;
+
+  //checks if it can be removed. no conflict.
+  if (board[r][c] == -1) {
+    board[r][c] = 0;
+    int d = 0;
+
+    //- 1 to make sure that you don't go out of bounds.
+    while (r < board.length - 1) {
+      //this part increments south by one and checks and subtracting.
+      r++;
+      d++;
+      board[r][c]--;
+
+      // this part increments east by one and checks and substracting.
+      if (c + d <= board.length - 1){
+        board[r][c + d]--;
+      }
+
+      //checks the possibility of going west and subtracts.
+      if (c - d >= 0) {
+        board[r][c - d]--;
+      }
     }
-    if (r + i < board.length) {
-      board[r + i][c + i]--;
-    }
+
+    //return statments.
+    return true;
   }
-  board[r][c] = 0;
-  return true;
-}
+  return false;
+  }
 
 
 //Public Methods:
