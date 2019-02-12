@@ -1,7 +1,7 @@
 public class QueenBoard {
 //Instance Variables:
 private int[][]board;
-private int numQueens;
+public int numQueens;
 
 //Constructor:
 //sets all the spaces in the board to 0.
@@ -165,11 +165,43 @@ public boolean solve(){
   for (int i = 0; i < board.length; i++) {
     for (int x = 0; x < board.length; x++) {
       if (board[i][x] != 0) {
-        throw IllegalStateException("no good.");
+        throw IllegalStateException();
       }
     }
   }
   return helperbool(0);
+}
+
+private int counter() {
+  for (int i = 0; i < board.length; i++) {
+    for (int x = 0; x < board.length; x++) {
+      if (board[i][x] == -1){
+        numQueens++;
+      }
+    }
+  }
+}
+
+private boolean helperbool(int c) {
+  if (c >= board.length) {
+    return numQueens == board.length;
+  }
+
+    for (int i = 0; i < board.length; i++) {
+      if (addQueen(i, c)) {
+
+        //a recursive call is used here because
+        if (helperbool(c + 1)){
+          return true;
+        }
+
+        else {
+          removeQueen(i, c)
+        }
+      }
+    }
+  //return boolean
+  return false;
 }
 
 /**
@@ -180,7 +212,7 @@ public int countSolutions(){
   for (int i = 0; i < board.length; i++) {
     for (int x = 0; x < board.length; x++) {
       if (board[i][x] != 0) {
-        throw IllegalStateException("no good.");
+        throw IllegalStateException();
       }
     }
   }
