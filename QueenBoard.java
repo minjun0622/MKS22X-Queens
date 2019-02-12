@@ -180,11 +180,12 @@ private int counter() {
       }
     }
   }
+  return numQueens;
 }
 
 private boolean helperbool(int c) {
   if (c >= board.length) {
-    return numQueens == board.length;
+    return count() == board.length;
   }
 
     for (int i = 0; i < board.length; i++) {
