@@ -1,7 +1,6 @@
 public class QueenBoard {
 //Instance Variables:
-private int[][]board;
-public int numQueens;
+private int[][] board;
 
 //Constructor:
 //sets all the spaces in the board to 0.
@@ -74,38 +73,25 @@ private boolean addQueen(int r, int c){
 //A private method to see if you can remove a queen.
 private boolean removeQueen(int r, int c){
   //first checks for if the dimensions surpass the board.
-  if (r >= board.length || c >= board[0].length){
+  if (board[r][c] != -1){
     return false;
   }
 
-  //checks if it can be removed. no conflict.
-  if (board[r][c] == -1) {
-    board[r][c] = 0;
-    int d = 0;
+    for (int i = 1; i < board.length - c; i++) {
+      board[r][c + i]--;
 
-    //- 1 to make sure that you don't go out of bounds.
-    while (r < board.length - 1) {
-      //this part increments south by one and checks and subtracting.
-      r++;
-      d++;
-      board[r][c]--;
-
-      // this part increments east by one and checks and substracting.
-      if (c + d <= board.length - 1){
-        board[r][c + d]--;
+      if (r - i >= 0) {
+        board[r - i][c + i]--;
       }
 
-      //checks the possibility of going west and subtracts.
-      if (c - d >= 0) {
-        board[r][c - d]--;
+      if (r + i < board.length) {
+        board[r + i][c + i]--;
       }
     }
 
-    //return statments.
-    return true;
-  }
-  return false;
-  }
+      board[r][c] = 0;
+      return true;
+    }
 
   //Public Methods:
 
@@ -116,11 +102,11 @@ private boolean removeQueen(int r, int c){
       for (int x = 0; x < board[i].length; x++){
         if (board[i][x] != -1) {
           result += "_ ";
-          //Q represents Queen.
+          //_ represents a space
         }
         else {
-          result = "Q ";
-          //_ represents a space.
+          result += "Q ";
+          //Q represents a Queen
         }
       }
     }
@@ -154,20 +140,19 @@ private boolean removeQueen(int r, int c){
     if (c >= board.length) {
       return counter() == board.length;
     }
-
+    else {
       for (int i = 0; i < board.length; i++) {
         if (addQueen(i, c)) {
-
           //a recursive call is used here because
           if (helperbool(c + 1)){
             return true;
           }
-
           else {
             removeQueen(i, c);
           }
         }
       }
+    }
     //return boolean
     return false;
   }
