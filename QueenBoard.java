@@ -122,95 +122,98 @@ private boolean removeQueen(int r, int c){
   return false;
   }
 
-//Public Methods:
+  //Public Methods:
 
-public String toString(){
-  Strng result = "";
-  for (int i = 0; i < board.length; i++) {
-    String output = "";
-    for (int x = 0; x < board[i].length; x++){
-      if (board[i][x] < 0) {
-        output += "Q ";
-        //Q represents Queen.
-      }
-      else {
-        result = "_ ";
-        //_ represents a space.
-      }
-    }
-    result += output + "\n";
-  }
-  return result;
-}
-
-public boolean solve(){
-  for (int i = 0; i < board.length; i++) {
-    for (int x = 0; x < board.length; x++) {
-      if (board[i][x] != 0) {
-        throw IllegalStateException();
-      }
-    }
-  }
-  return helperbool(0);
-}
-
-private int counter() {
-  for (int i = 0; i < board.length; i++) {
-    for (int x = 0; x < board.length; x++) {
-      if (board[i][x] == -1){
-        numQueens++;
-      }
-    }
-  }
-  return numQueens;
-}
-
-public boolean helperbool(int c) {
-  if (c >= board.length) {
-    return counter() == board.length;
-  }
-
+  public String toString(){
+    String result = "";
     for (int i = 0; i < board.length; i++) {
-      if (addQueen(i, c)) {
-
-        //a recursive call is used here because
-        if (helperbool(c + 1)){
-          return true;
+      result += "\n";
+      for (int x = 0; x < board[i].length; x++){
+        if (board[i][x] != -1) {
+          result += "_ ";
+          //Q represents Queen.
         }
-
         else {
-          removeQueen(i, c)
+          result = "Q ";
+          //_ represents a space.
         }
       }
     }
-  //return boolean
-  return false;
-}
+    return result;
+  }
 
-public int countSolutions(){
-  for (int i = 0; i < board.length; i++) {
-    for (int x = 0; x < board.length; x++) {
-      if (board[i][x] != 0) {
-        throw IllegalStateException();
+  public boolean solve(){
+    for (int i = 0; i < board.length; i++) {
+      for (int x = 0; x < board.length; x++) {
+        if (board[i][x] != 0) {
+          throw new IllegalStateException();
+        }
       }
     }
+    return helperbool(0);
   }
-  return helperint(0);
-}
 
-public int helperint(int c) {
-  //if row is equal to dimensions, it is one solution.
-   if (c == board.length) {
-     return 1;
-   }
+  private int counter() {
+    int count = 0;
+    for (int i = 0; i < board.length; i++) {
+      for (int x = 0; x < board.length; x++) {
+        if (board[i][x] == -1){
+          count++;
+        }
+      }
+    }
+    return count;
+  }
 
-   int count = 0;
-   for (int i = 0; i < board.length; i++) {
-     if (addQueen(i, c)) {
-       //recursive call once more.
-       count += helperint(i + 1);
-       removeQueen(i, c);
+  public boolean helperbool(int c) {
+    if (c >= board.length) {
+      return counter() == board.length;
+    }
+
+      for (int i = 0; i < board.length; i++) {
+        if (addQueen(i, c)) {
+
+          //a recursive call is used here because
+          if (helperbool(c + 1)){
+            return true;
+          }
+
+          else {
+            removeQueen(i, c);
+          }
+        }
+      }
+    //return boolean
+    return false;
+  }
+
+  public int countSolutions(){
+    for (int i = 0; i < board.length; i++) {
+      for (int x = 0; x < board.length; x++) {
+        if (board[i][x] != 0) {
+          throw new IllegalStateException();
+        }
+      }
+    }
+    return helperint(0);
+  }
+
+  public int helperint(int c) {
+    //if row is equal to dimensions, it is one solution.
+     if (c == board.length) {
+       return 1;
      }
+
+     int count = 0;
+     for (int i = 0; i < board.length; i++) {
+       if (addQueen(i, c)) {
+         //recursive call once more.
+         count += helperint(i + 1);
+         removeQueen(i, c);
+       }
+     }
+     return count;
    }
-   return count;
- }
+
+
+  }
