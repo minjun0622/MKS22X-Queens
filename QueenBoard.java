@@ -143,9 +143,11 @@ public String toString(){
     for (int x = 0; x < board[i].length; x++){
       if (board[i][x] < 0) {
         output += "Q ";
+        //Q represents Queen.
       }
       else {
         result = "_ ";
+        //_ represents a space.
       }
     }
     result += output + "\n";
