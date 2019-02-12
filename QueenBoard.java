@@ -37,21 +37,25 @@ private boolean addQueen(int r, int c){
     return false;
     //if it's already added, what's the point of adding again??
   }
+  /*
+  0 0 0 0
+  0 0 0 0
+  0 0 0 0
+  0 0 0 0
+  ok, to traverse as a queen, board[0][0]
+  north = board[r - 1][c]
+  east = board[r][c + 1]
+  south east = board[r + 1][c + 1]
+  south = board[r + 1][c]
+  west = board[r][c - 1]
+  north east = board[r - 1][c + 1]
+  south west = board[r + 1][c - 1]
+  north west = board[r - 1][c - 1]
+
+
+  */
   board[r][c] = 1;
   int count = 1;
-  while (c + count < board.length) {
-    board[r][c + count]--;
-    if (r - count >= 0) {
-      //moving up.
-      board[r - count][c + count]--;
-    }
-    if (r + count < board.length) {
-      //diagonal shift.
-      board[r + count][c + count]--;
-    }
-    count++;
-  }
-  numQueens++;
 
   return true;
 }
