@@ -36,6 +36,7 @@ private boolean addQueen(int r, int c){
   if (board[r][c] != 0) {
     return false;
   }
+  while
   if ((board[r][c] == board[r+1][c]) && board[r][c] == board[r][c+1]){
   board[r][c] += 1;
   return true;
@@ -67,13 +68,15 @@ else{
 *excludes the character up to the *)
 */
 public String toString(){
+  Strng result = "";
   for (int i = 0; i < board.length; i++) {
+    result += "\n";
     for (int x = 0; x < board.length; x++){
       if (board[i][x] == 0) {
-        board [i][x] = '_';
+        result = "_ ";
       }
       else {
-        board [i][x] = 'Q';
+        result = 'Q';
       }
     }
   }
