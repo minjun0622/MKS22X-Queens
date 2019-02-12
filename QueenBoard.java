@@ -139,15 +139,16 @@ private boolean removeQueen(int r, int c){
 public String toString(){
   Strng result = "";
   for (int i = 0; i < board.length; i++) {
-    result += "\n";
-    for (int x = 0; x < board.length; x++){
-      if (board[i][x] == 0) {
-        result = 'Q';
+    String output = "";
+    for (int x = 0; x < board[i].length; x++){
+      if (board[i][x] < 0) {
+        output += "Q ";
       }
       else {
         result = "_ ";
       }
     }
+    result += output + "\n";
   }
   return result;
 }
